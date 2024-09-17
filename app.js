@@ -1,21 +1,25 @@
 import express from "express";
 import "./config/mongoConnection.js";
-
 import bodyParser from "body-parser";
 
 import authRoutes from "./routes/authRoute.js";
-import { createError } from "./utility/cusomError.js";
+import productRoutes from "./routes/productRoute.js";
 
 const app = express();
-app.use(express.json());
 
+// middleweres
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(authRoutes);
+// routes init
+app.use("/api/auth/", authRoutes);
+app.use("/api/products/", productRoutes);
 
 app.get("/", (req, resp) => {
   resp.send("ok");
 });
+
+// error handler
 
 app.use((req, resp, next) => {
   resp.json("page not found");
