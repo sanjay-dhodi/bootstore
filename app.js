@@ -1,10 +1,15 @@
 import express from "express";
-
 import "./config/mongoConnection.js";
+
+import bodyParser from "body-parser";
+
 import authRoutes from "./routes/authRoute.js";
 import { createError } from "./utility/cusomError.js";
 
 const app = express();
+app.use(express.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(authRoutes);
 
