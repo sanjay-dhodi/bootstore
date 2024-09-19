@@ -38,7 +38,7 @@ export const signIn = async (req, resp, next) => {
       return next(createError(401, "wrong password"));
     }
 
-    const token = jwt.sign({ name: "sanjay" }, process.env.JWT_SECRETE, {
+    const token = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRETE, {
       expiresIn: process.env.JWT_EXPIRY,
     });
 
